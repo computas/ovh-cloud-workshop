@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 // Define the Todo type
 interface Todo {
   id: number;
-  text: string;
+  title: string;
   completed: boolean;
 }
 
-const API_URL = 'https://jsonplaceholder.typicode.com/todos'; // Example public API
+const API_URL = 'http://localhost:8080/api/todos'; // Example public API
 
 const TodoApp: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -17,7 +17,7 @@ const TodoApp: React.FC = () => {
   // Fetch todos on mount
   useEffect(() => {
     setLoading(true);
-    fetch(`${API_URL}?_limit=5`)
+    fetch(`${API_URL}`)
       .then(res => res.json())
       .then(data => setTodos(data))
       .finally(() => setLoading(false));
@@ -29,7 +29,7 @@ const TodoApp: React.FC = () => {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: newTodo, completed: false })
+      body: JSON.stringify({ title: newTodo, completed: false })
     });
     const todo = await res.json();
     setTodos([todo, ...todos]);
@@ -74,7 +74,7 @@ const TodoApp: React.FC = () => {
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
             />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text || todo.title}</span>
+            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.title || todo.title}</span>
             <button onClick={() => deleteTodo(todo.id)} style={{ marginLeft: 'auto' }}>Delete</button>
           </li>
         ))}

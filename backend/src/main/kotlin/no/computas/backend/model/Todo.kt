@@ -13,5 +13,5 @@ open class Todo(
     open var title: String = "",
 
     @Column(nullable = false)
-    open var description: String = ""
+    open var completed: Boolean = false
 )
