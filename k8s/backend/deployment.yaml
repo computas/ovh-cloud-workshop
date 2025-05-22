@@ -16,21 +16,21 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: your-registry/your-quarkus-image:latest
+          image: your-registry/your-backend-image:latest
           ports:
             - containerPort: 8080
           env:
-            - name: QUARKUS_PROFILE
+            - name: SPRING_PROFILES_ACTIVE
               value: "prod"
           readinessProbe:
             httpGet:
-              path: /q/health/ready
+              path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /q/health/live
+              path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 20
             periodSeconds: 20
