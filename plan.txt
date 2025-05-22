@@ -61,3 +61,16 @@ Steps:
     - Creating.... 5min
 
     - Create User -> reset password?
+
+3. Managed Private Registry
+    - Select a region
+        - Frankfurt
+    - Private Registry name
+        - ovh-workshop
+    - Choose your plan
+        - s
+    - Create
+    - Installing.... 6min
+
+4. Harbor
+    - Generating new identification details
