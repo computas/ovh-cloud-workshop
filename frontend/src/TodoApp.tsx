@@ -1,0 +1,87 @@
+import React, { useEffect, useState } from 'react';
+
+// Define the Todo type
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+const API_URL = 'https://jsonplaceholder.typicode.com/todos'; // Example public API
+
+const TodoApp: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTodo, setNewTodo] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Fetch todos on mount
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${API_URL}?_limit=5`)
+      .then(res => res.json())
+      .then(data => setTodos(data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Add a new todo
+  const addTodo = async () => {
+    if (!newTodo.trim()) return;
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: newTodo, completed: false })
+    });
+    const todo = await res.json();
+    setTodos([todo, ...todos]);
+    setNewTodo('');
+  };
+
+  // Toggle completed
+  const toggleTodo = async (id: number) => {
+    const todo = todos.find(t => t.id === id);
+    if (!todo) return;
+    await fetch(`${API_URL}/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed: !todo.completed })
+    });
+    setTodos(todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
+  };
+
+  // Delete a todo
+  const deleteTodo = async (id: number) => {
+    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    setTodos(todos.filter(t => t.id !== id));
+  };
+
+  return (
+    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
+      <h2>TODO App</h2>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input
+          value={newTodo}
+          onChange={e => setNewTodo(e.target.value)}
+          placeholder="Add a new todo"
+        />
+        <button onClick={addTodo}>Add</button>
+      </div>
+      {loading ? <p>Loading...</p> : null}
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        {todos.map(todo => (
+          <li key={todo.id} style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 10 }}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text || todo.title}</span>
+            <button onClick={() => deleteTodo(todo.id)} style={{ marginLeft: 'auto' }}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default TodoApp;
+
