@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
+  namespace: ovh-workshop-1
   labels:
     app: backend-app
 spec:
