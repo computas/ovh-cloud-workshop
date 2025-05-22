@@ -4,14 +4,14 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "todos")
-data class Todo(
+open class Todo(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    open var id: Long = 0,
 
     @Column(nullable = false)
-    val title: String,
+    open var title: String = "",
 
     @Column(nullable = false)
-    val description: String
+    open var description: String = ""
 )
