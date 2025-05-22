@@ -16,7 +16,6 @@ class TodoService(private val todoRepository: TodoRepository) {
     fun updateTodo(id: Long, updatedTodo: Todo): Todo? {
         val existingTodo = todoRepository.findById(id).orElse(null) ?: return null
         existingTodo.title = updatedTodo.title
-        existingTodo.completed = updatedTodo.completed
         return todoRepository.save(existingTodo)
     }
 

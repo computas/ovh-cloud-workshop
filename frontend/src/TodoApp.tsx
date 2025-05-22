@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import computasLogo from './assets/computas-logo.svg';
 
 // Define the Todo type
 interface Todo {
@@ -36,18 +37,6 @@ const TodoApp: React.FC = () => {
     setNewTodo('');
   };
 
-  // Toggle completed
-  const toggleTodo = async (id: number) => {
-    const todo = todos.find(t => t.id === id);
-    if (!todo) return;
-    await fetch(`${API_URL}/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ completed: !todo.completed })
-    });
-    setTodos(todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
-  };
-
   // Delete a todo
   const deleteTodo = async (id: number) => {
     await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -56,6 +45,7 @@ const TodoApp: React.FC = () => {
 
   return (
     <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
+      <img src={computasLogo} alt="Computas AS Logo" style={{ display: 'block', margin: '0 auto 1rem', maxWidth: '100%' }} />
       <h2>TODO App</h2>
       <div style={{ display: 'flex', gap: 8 }}>
         <input
@@ -69,11 +59,6 @@ const TodoApp: React.FC = () => {
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {todos.map(todo => (
           <li key={todo.id} style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 10 }}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id)}
-            />
             <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.title || todo.title}</span>
             <button onClick={() => deleteTodo(todo.id)} style={{ marginLeft: 'auto' }}>Delete</button>
           </li>
