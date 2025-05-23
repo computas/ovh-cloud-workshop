@@ -17,21 +17,33 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: your-registry/your-backend-image:latest
+          image: 4579017v.c1.de1.container-registry.ovh.net/library/backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql-a46d6eaf-ob39cfce8.database.cloud.ovh.net:20184/defaultdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: avnadmin
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: password
+            - name: version
+              value: "1"
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 20
             periodSeconds: 20

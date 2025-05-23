@@ -74,3 +74,10 @@ Steps:
 
 4. Harbor
     - Generating new identification details
+
+
+
+
+
+
+Database secret: k create secret generic dbsecret --from-literal=......
