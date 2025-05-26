@@ -2,7 +2,7 @@
 
 ## Task 1 - Generate Database password secret
 
-We will be using Kubernetes Secrets to store the password to our database. To simply we will provide the admin user's credentials for our backend application. (this is obviously not a good idea in production...)
+We will be using Kubernetes Secrets to store the password to our database. To simplify we will provide the admin user's credentials for our backend application. (this is obviously not a good idea in production...)
 
 So your task is to find the credentials (hint: look under users tab under the managed database section) and create a Kubernetes secret on the form:
 

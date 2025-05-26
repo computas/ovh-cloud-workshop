@@ -17,7 +17,7 @@ This workshop consist of two(?) parts. When you have completed all the parts you
 
 [Part 3 - Deploy applications](deploy.md)
 
-
+![archetecture](architecture.png)
 
 
 
