@@ -28,7 +28,6 @@ Steps:
     - Confirm
 
 
-
     Add Private network
     - Private network name
     - Layer 2 network option (la stå tom)
@@ -62,7 +61,7 @@ Steps:
 
     - Create User -> reset password?
 
-3. Managed Private Registry
+3. Managed Private Registry (Harbor)
     - Select a region
         - Frankfurt
     - Private Registry name
@@ -72,7 +71,7 @@ Steps:
     - Create
     - Installing.... 6min
 
-4. Harbor
+4. Login to Harbor
     - Generating new identification details
 
 
