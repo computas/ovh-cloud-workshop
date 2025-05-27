@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: ovh-workshop-1
-  labels:
-    name: ovh-workshop-1

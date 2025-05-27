@@ -1,6 +1,10 @@
 *Finally! We can now deploy our applications*
 
-# Task 1 - Apply Kubernetes config for frontend
+# Task 1
+
+
+
+# Task 2 - Apply Kubernetes config for frontend
 
 Under the `/k8s` folder you will find a `/backend` and a `/frontend` folder. Under the `/frontend` folder you will find a Kubernetes Service and Deployment definition. In the deployment definition there is a reference to the docker image the container will be using. You will have to update this to pull from your Harbor instance.
 
@@ -15,7 +19,7 @@ kubectl apply -f /frontend
 
 </details>
 
-# Task 2 - Apply Kubernetes config for backend
+# Task 3 - Apply Kubernetes config for backend
 
 This step is similar to the first, but you need to consider one more thing. The secret we created in Part 2 will have to correspond to the database secret in the `deployment.yaml` file for the backend service. 
 

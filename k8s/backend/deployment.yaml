@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
-  namespace: ovh-workshop-1
+  namespace: app
   labels:
     app: backend-app
 spec:
@@ -32,7 +32,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: dbsecret
-                  key: password
+                  key: PASSWORD
             - name: version
               value: "1"
           readinessProbe:

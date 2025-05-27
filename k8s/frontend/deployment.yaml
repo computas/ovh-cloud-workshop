@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-app
-  namespace: ovh-workshop-1
+  namespace: app
   labels:
     app: frontend-app
 spec:
