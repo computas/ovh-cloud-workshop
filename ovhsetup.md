@@ -58,18 +58,19 @@ The application is using a PostgreSql database, let's set that up now.
     - Network
         - Private network (vRack)
         - Private network attached
-            - workshop-network
+            - (use network created in Task 1)
         - Subnetwork
             - 10.1.0.0/16 - UK1
         - Authorised IPs
             - leave empty
+        - Price: "Hour"
 - Order!
 - Creating...
 
 
 ## Task 3 - Create an Artifact Registry to host Container images
 
-To host our Container Images we need a registry, OVHCloud offers a managed solution for this. It is based on the open source artifact registry [Harbor](https://goharbor.io/). When creating this resource OVH will basically just set up a VM with Harbor installed, expose it over the internet and provide you with login credentials.
+To host our Container Images we need a registry, OVHCloud offers a managed solution for this. It is based on the open source artifact registry [Harbor](https://goharbor.io/). When creating this resource OVH will set up a VM with Harbor installed, expose it over the internet and provide you with login credentials.
 
 Managed Private Registry (Harbor)
 - Select a region
@@ -81,18 +82,22 @@ Managed Private Registry (Harbor)
 - Create
 - Installing.... 6min
 
-Nice! Once the VM is up and running you can click "Generate new identification details" to get credentials to be able to log in to your new Harbor instance.
+Nice! Once the VM is up and running you can click "Generate new identification details" to get credentials to be able to log in to your new Harbor instance. Please that note of the credentials, you will need them later.
+
+You can try to login to the Harbor UI by clicking the "Access the Harbor user interface" button. From here you should be able to find the URL to which you will push images in the next task.
 
 ## Task 4 - Build application container images and push to Harbor
 
 We have created a simple TODO app consisting of a frontend React application and a backend Spring Boot application that talks to a database.
 
-Under the folders /frontend and /backend you can find a Dockerfile for each application. You should now build and publish the resulting image to your new Harbor instance.
+Before proceeding you need to configure VITE_API_URL in the `/frontend` folder and set it to <prefix>.xxxx.com which references the subdomain (you choose the subdomain) which your app wil finally be hosed on (ask us if this is unclear).
 
-Before proceeding you need to configure VITE_API_URL and set it to <prefix>.xxxx.com (ask us if this is unclear).
+Under the folders `/frontend` and `/backend` you can find a Dockerfile for each application. You should now build and publish the resulting image to your new Harbor instance.
 
 💡 _HINT:_ Enter Harbor UI to find the URL that the image should be pushed to.
+
 💡 _HINT 2:_ `docker login <your instance>.container-registry.ovh.net` to log in to your Harbor instance before pushing the images.
+
 💡 _HINT 3:_ Make sure you build the image for the correct platform (`--platform=linux/amd64`).
 
 <details>
