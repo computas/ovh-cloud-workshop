@@ -94,7 +94,7 @@ Before proceeding you need to configure VITE_API_URL in the `/frontend` folder a
 
 Under the folders `/frontend` and `/backend` you can find a Dockerfile for each application. You should now build and publish the resulting image to your new Harbor instance.
 
-💡 _HINT:_ Enter Harbor UI to find the URL that the image should be pushed to.
+💡 _HINT 1:_ Enter Harbor UI to find the URL that the image should be pushed to.
 
 💡 _HINT 2:_ `docker login <your instance>.container-registry.ovh.net` to log in to your Harbor instance before pushing the images.
 
@@ -114,6 +114,8 @@ docker push <your instance>.container-registry.ovh.net/library/frontend:latest
 
 Build and push backend:
 ```bash
+cd backend 
+
 docker build --platform=linux/amd64 -t <your instance>.container-registry.ovh.net/library/backend:latest .
 
 docker push <your instance>.container-registry.ovh.net/library/backend:latest
@@ -125,3 +127,4 @@ docker push <your instance>.container-registry.ovh.net/library/backend:latest
 Enter the Harbor UI to see that the images you build have been pushed successfully. 
 
 
+🚀 You can now continue to part 2 🚀 

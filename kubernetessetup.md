@@ -1,6 +1,21 @@
 *In this part you will make the Kubernetes cluster ready to host our application*
 
-## Task 1 - Create application namespace
+## Task 1 - Set up Kubernetes Config
+
+Under managed Kubernetes you can download your kubeconfig file. 
+
+Set the Kubernetes context to use the new kubeconfig.
+
+<details>
+  <summary>✨ Se fasit</summary>
+
+To use it you can run: `export KUBECONFIG=<path to kubeconfig file>`
+
+NOTE: This config will only be applied to the current terminal session!
+
+</details>
+
+## Task 2 - Create application namespace
 
 Create a namespace called `app`. This is where we are going to run our applications.
 
@@ -13,7 +28,7 @@ kubectl create namespace app
 
 </details>
 
-## Task 1 - Generate Database password secret
+## Task 3 - Generate Database password secret
 
 We will be using Kubernetes Secrets to store the password to our database. To simplify we will provide the admin user's credentials for our backend application. (this is obviously not a good idea in production...)
 
@@ -33,7 +48,7 @@ kubectl create secret generic <name of secret> --from-literal=PASSWORD=<secret> 
 
 </details>
 
-## Install Traefik using helm 
+## Task 4 - Install Traefik using helm 
 
 ```shell
 helm repo add traefik https://helm.traefik.io/traefik
@@ -44,7 +59,7 @@ helm install traefik traefik/traefik --namespace traefik --create-namespace
 Now if you run `kubectl get svc --all-namespaces` you will see that you have a new service in the `traefik` namespace. This service is of type LoadBalancer. This type of service is a bit special, its behavior is defined by the "cloud-controller-manager" which embeds cloud-specific control logic. This means that since we are running inside OVHCloud, it is OVHCloud own logic that is triggered when a LoadBalancer service is created. The result is that a OVHCloud Load Balancer is created outside our cluster and configured to forward traffic to the cluster's nodes.
 
 
-## Install Cert-Manager using helm 
+## Task 5 - Install Cert-Manager using helm 
 
 ```shell
 helm repo add jetstack https://charts.jetstack.io
@@ -52,7 +67,7 @@ helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.14.5 --set installCRDs=true
 ```
 
-## Configure ingress and Let's Encrypt Issuer
+## Task 6 - Configure ingress and Let's Encrypt Issuer
 
 Apply the ingress and Let's Encrypt issuer configuration:
 
