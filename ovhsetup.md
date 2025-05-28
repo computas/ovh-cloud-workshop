@@ -15,28 +15,28 @@ Our application will be running inside OVHCloud's managed Kubernetes cluster, so
     - Maximum security <- vs. Minimum unavaiable
     - Version 1.32
 - Choose a private network for this cluster
-    - Create a private network -> Add private network (*)
-    - Select created network
+    - Create a private network -> Add private network (do this in another tab, will return to this tab shortly)
+        - Private network name
+        - London / 1-AZ region
+        - Layer 2 network option (la stå tom)
+        - Configure Subnet
+            - Check off for "Enable DHCP"
+            - Check off for "Declare the first address..." (already checked)
+            - Check off for "assign Gateway and connect to the private network"
+    - Go back to previous tab and select the created network (you may have click the refresh button) 
     - Choose a subnet
-        - nodes private interface
+        - Check off for "Nodes private interface"
 - Configure one or more node pools
     - set name
     - Select a model
-        - general purpose
+        - general purpose (B3-8)
         - size 3
     - ingen autoscaling
     - ingen anti-affinity
 - Set billing type
     - hour
-- Confirm
-
-**Add Private network: (*)**
-- Private network name
-- Layer 2 network option (la stå tom)
-- Configure Subnet
-    - Enable DHCP
-    - Declare tje first address
-    - Create Gateway
+- Click "Add node pool" -> "next"
+- "Confirm cluster"
 
 
 ## Task 2 - Create Postgres Database
