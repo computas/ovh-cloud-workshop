@@ -89,8 +89,11 @@ We have created a simple TODO app consisting of a frontend React application and
 
 Under the folders /frontend and /backend you can find a Dockerfile for each application. You should now build and publish the resulting image to your new Harbor instance.
 
+Before proceeding you need to configure VITE_API_URL and set it to <prefix>.xxxx.com (ask us if this is unclear).
+
 💡 _HINT:_ Enter Harbor UI to find the URL that the image should be pushed to.
-💡 _HINT 2:_ Make sure you build the image for the correct platform (`--platform=linux/amd64`).
+💡 _HINT 2:_ `docker login <your instance>.container-registry.ovh.net` to log in to your Harbor instance before pushing the images.
+💡 _HINT 3:_ Make sure you build the image for the correct platform (`--platform=linux/amd64`).
 
 <details>
   <summary>✨ Se fasit</summary>

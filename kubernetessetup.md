@@ -35,19 +35,39 @@ kubectl create secret generic <name of secret> --from-literal=PASSWORD=<secret> 
 
 ## Install Traefik using helm 
 
-...need to be able to do this ourselves first...
+```shell
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik --namespace traefik --create-namespace
+```
 
 Now if you run `kubectl get svc --all-namespaces` you will see that you have a new service in the `traefik` namespace. This service is of type LoadBalancer. This type of service is a bit special, its behavior is defined by the "cloud-controller-manager" which embeds cloud-specific control logic. This means that since we are running inside OVHCloud, it is OVHCloud own logic that is triggered when a LoadBalancer service is created. The result is that a OVHCloud Load Balancer is created outside our cluster and configured to forward traffic to the cluster's nodes.
 
 
 ## Install Cert-Manager using helm 
 
-...
+```shell
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.14.5 --set installCRDs=true
+```
 
-## Configure ingress
+## Configure ingress and Let's Encrypt Issuer
 
-...
+Apply the ingress and Let's Encrypt issuer configuration:
 
+```bash
+kubectl apply -f ingress
+```
 
+You can now inspect the ingress and cluster issuer resources:
 
+```bash
+kubectl get clusterissuers.cert-manager.io
+kubectl get ingress
+```
+
+This allows us to use Let's Encrypt to automatically issue TLS certificates for our applications.
+
+Note the IP address listed under the ingress, you will have to provide that IP to the workshop organizers to that they can configure the DNS records for you.
 

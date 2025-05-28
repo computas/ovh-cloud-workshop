@@ -8,7 +8,7 @@ interface Todo {
   completed: boolean;
 }
 
-const API_URL = 'http://localhost:8080/api/todos'; // Example public API
+const API_URL = `${import.meta.env.VITE_API_URL}/todos`
 
 const TodoApp: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
