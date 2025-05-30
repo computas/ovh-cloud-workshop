@@ -4,11 +4,11 @@ metadata:
   name: my-app
   namespace: app
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: traefik
   rules:
-  - host: test.arsalankhalid.com
+  - host: test2.arsalankhalid.com
     http:
       paths:
         - path: /
@@ -27,5 +27,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-      - test.arsalankhalid.com
-    secretName: my-app-tls
+      - test2.arsalankhalid.com
+    secretName: my-app-tls-2

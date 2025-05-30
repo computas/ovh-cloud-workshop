@@ -86,11 +86,13 @@ Nice! Once the VM is up and running you can click "Generate new identification d
 
 You can try to login to the Harbor UI by clicking the "Access the Harbor user interface" button. From here you should be able to find the URL to which you will push images in the next task.
 
-## Task 4 - Build application container images and push to Harbor
+## Task 4 - Prepare the applications
 
 We have created a simple TODO app consisting of a frontend React application and a backend Spring Boot application that talks to a database.
 
 Before proceeding you need to configure VITE_API_URL in the `/frontend` folder and set it to <prefix>.xxxx.com which references the subdomain (you choose the subdomain) which your app wil finally be hosed on (ask us if this is unclear).
+
+## Task 5 - Build application container images and push to Harbor
 
 Under the folders `/frontend` and `/backend` you can find a Dockerfile for each application. You should now build and publish the resulting image to your new Harbor instance.
 
@@ -122,7 +124,7 @@ docker push <your instance>.container-registry.ovh.net/library/backend:latest
 ```
 </details>
 
-## Task 5 - Check that your images have been uploaded successfully
+## Task 6 - Check that your images have been uploaded successfully
 
 Enter the Harbor UI to see that the images you build have been pushed successfully. 
 
