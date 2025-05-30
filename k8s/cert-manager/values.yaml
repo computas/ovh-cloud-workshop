@@ -1,9 +1,0 @@
-cert-manager:
-  global:
-    revisionHistoryLimit: 1
-
-  crds:
-    enabled: false
-    keep: true
-
-  namespace: cert-manager

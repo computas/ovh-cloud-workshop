@@ -1,14 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-app
+  name: app-ingress
   namespace: app
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
-  ingressClassName: traefik
   rules:
-  - host: test2.arsalankhalid.com
+  - host: sondre-2.computas.dev # TODO: switch to your domain
     http:
       paths:
         - path: /
@@ -27,5 +24,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-      - test2.arsalankhalid.com
-    secretName: my-app-tls-2
+    - sondre-2.computas.dev # TODO: switch to your domain
+    secretName: app-certificate-secret

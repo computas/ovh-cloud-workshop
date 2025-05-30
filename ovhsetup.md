@@ -1,4 +1,4 @@
-*In this part you will configure and setup the OVH resources our application needs.*
+*In this part you will configure and set up the OVH resources our application needs.*
 
 ## Task 1 - Create Managed Kubernetes in OVHCloud
 

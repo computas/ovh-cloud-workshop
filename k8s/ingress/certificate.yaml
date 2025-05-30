@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app-ingressroute-certificate
+  namespace: app # This certificate is specific to the app/ingress
+spec:
+  secretName: app-certificate-secret
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - sondre-2.computas.dev # TODO: switch to your domain

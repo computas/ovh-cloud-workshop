@@ -56,10 +56,11 @@ helm install traefik traefik/traefik --namespace traefik --create-namespace
 
 Now if you run `kubectl get svc --all-namespaces` you will see that you have a new service in the `traefik` namespace. This service is of type LoadBalancer. This type of service is a bit special, its behavior is defined by the "cloud-controller-manager" which embeds cloud-specific control logic. This means that since we are running inside OVHCloud, it is OVHCloud own logic that is triggered when a LoadBalancer service is created. The result is that a OVHCloud Load Balancer is created outside our cluster and configured to forward traffic to the cluster's nodes.
 
+⏸️ Please pause the workshop here and ask the workshop organizers to configure the DNS records to point to the external IP of the Traefik Load Balancer service.
 
 ## Task 5 - Configure ingress to point subdomain
 
-In the `k8s/ingress/ingress.yaml` change the <change me> sections to point to the subdomain you specified when building the frontend application.
+In the `k8s/ingress` folder change the #TODO fields to point to the subdomain you specified when building the frontend application.
 
 ## Task 5 - Install Cert-Manager using helm 
 
@@ -68,27 +69,29 @@ Then install cert-manager using helm:
 ```shell
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.14.5 --set installCRDs=true
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.17.2 \
+  --set crds.enabled=true
 ```
 
-## Task 6 - Configure ingress and Let's Encrypt Issuer
+## Task 6 - Configure ClusterIssuer, Certificate and Ingress
 
-Change directory to the `k8s` folder and apply the ingress and Let's Encrypt issuer configuration:
+Docs if you are especially interested: https://doc.traefik.io/traefik/user-guides/cert-manager/
 
-```bash
-kubectl apply -f ingress/clusterIssuer.yaml
+- Configure ClusterIssuer:
+    - ℹ️ This resource represents a CA (Certificate Authority) which is responsible for creating and signing the TLS certificates. The ClusterIssuer object is globally scoped, meaning it can be used across namespaces.
+    - Apply the `cluster-issuer.yaml` configuration
 
-kubectl apply -f ingress/ingress.yaml
-```
+- Configure Certificate:
+    - ℹ️This resource represents a certificate request. `cert-manager` uses this input to generate a private key and a CertificateRequest resource in order to obtain a signed certificate from the ClusterIssuer we defined above.
+    - Make sure your chosen DNS name is specified under: `spec.dnsNames` and then apply the `certificate.yaml` configuration.
 
-You can now inspect the ingress and cluster issuer resources:
+- Configure Ingress:
+    - ℹ️The Ingress is a definition of our ingress that is read and handled by Traefik.
+    - Make sure your chosen DNS name is specified under: `spec.rules[0].host` and `spec.tls[0].hosts`
+    - Then apply the `ingress.yaml` configuration.
 
-```bash
-kubectl get clusterissuers.cert-manager.io
-kubectl get ingress --namespace=app
-```
-
-This allows us to use Let's Encrypt to automatically issue TLS certificates for our applications.
-
-Note the IP address listed under the ingress, you will have to provide that IP to the workshop organizers to that they can configure the DNS records for you.
-
+🚀 You can now continue to part 3 🚀 
