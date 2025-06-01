@@ -5,7 +5,7 @@ metadata:
   namespace: app
 spec:
   rules:
-  - host: sondre-2.computas.dev # TODO: switch to your domain
+  - host: sondre11.computas.dev # TODO: switch to your domain
     http:
       paths:
         - path: /
@@ -24,5 +24,5 @@ spec:
                 number: 80
   tls:
   - hosts:
-    - sondre-2.computas.dev # TODO: switch to your domain
+    - sondre11.computas.dev # TODO: switch to your domain
     secretName: app-certificate-secret

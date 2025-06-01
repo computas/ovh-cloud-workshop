@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: 4579017v.c1.de1.container-registry.ovh.net/library/backend:latest
+          image: hkk7hxdj.c1.de1.container-registry.ovh.net/library/backend:latest # TODO: update to your env
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -25,7 +25,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgresql-a46d6eaf-ob39cfce8.database.cloud.ovh.net:20184/defaultdb
+              value: jdbc:postgresql://postgresql-4a160e41-o1c20b03b.database.cloud.ovh.net:20184/defaultdb?sslmode=require # TODO: update to your env
             - name: SPRING_DATASOURCE_USERNAME
               value: avnadmin
             - name: SPRING_DATASOURCE_PASSWORD
@@ -34,7 +34,7 @@ spec:
                   name: dbsecret
                   key: PASSWORD
             - name: version
-              value: "1"
+              value: "6"
           readinessProbe:
             httpGet:
               path: /actuator/health

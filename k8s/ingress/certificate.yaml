@@ -9,4 +9,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - sondre-2.computas.dev # TODO: switch to your domain
+    - sondre11.computas.dev # TODO: switch to your domain

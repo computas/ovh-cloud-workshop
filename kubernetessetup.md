@@ -32,7 +32,7 @@ kubectl create namespace app
 
 We will be using Kubernetes Secrets to store the password to our database. To simplify we will provide the admin user's credentials for our backend application. (this is obviously not a good idea in production...)
 
-So your task is to find the credentials (hint: look under users tab under the managed database section) and create a Kubernetes secret on the form `PASSWORD=<secret>` named dbsecret.
+So your task is to find the credentials (hint: look under users tab under the managed database section) and create a Kubernetes secret on the form `PASSWORD=<secret>` named dbsecret, in the `app` namespace you created in the previous step.
 
 ❗❗❗️ _NOTE:_ In a production environment Kubernetes secrets are not secure out of the box. You will have to configure your cluster to encrypt the secrets or use external secret manager. (out of scope for this workshop)
 
@@ -54,9 +54,11 @@ helm repo update
 helm install traefik traefik/traefik --namespace traefik --create-namespace
 ```
 
-Now if you run `kubectl get svc --all-namespaces` you will see that you have a new service in the `traefik` namespace. This service is of type LoadBalancer. This type of service is a bit special, its behavior is defined by the "cloud-controller-manager" which embeds cloud-specific control logic. This means that since we are running inside OVHCloud, it is OVHCloud own logic that is triggered when a LoadBalancer service is created. The result is that a OVHCloud Load Balancer is created outside our cluster and configured to forward traffic to the cluster's nodes.
+Now if you run `kubectl get svc --all-namespaces` you will see that you have a new service in the `traefik` namespace. This service is of type LoadBalancer. This type of service is a bit special, its behavior is defined by the "cloud-controller-manager" which embeds cloud-specific control logic. This means that since we are running inside OVHCloud, it is OVHCloud's own logic that is triggered when a LoadBalancer service is created. The result is that a OVHCloud Load Balancer is created outside our cluster and configured to forward traffic to the cluster's nodes.
 
 ⏸️ Please pause the workshop here and ask the workshop organizers to configure the DNS records to point to the external IP of the Traefik Load Balancer service.
+
+(It will probably say <pending> under External IP for a couple of minutes. Just grab a ☕️ and relax.)
 
 ## Task 5 - Configure ingress to point subdomain
 
@@ -88,6 +90,7 @@ Docs if you are especially interested: https://doc.traefik.io/traefik/user-guide
 - Configure Certificate:
     - ℹ️This resource represents a certificate request. `cert-manager` uses this input to generate a private key and a CertificateRequest resource in order to obtain a signed certificate from the ClusterIssuer we defined above.
     - Make sure your chosen DNS name is specified under: `spec.dnsNames` and then apply the `certificate.yaml` configuration.
+    - Apply the `certificate.yaml` configuration
 
 - Configure Ingress:
     - ℹ️The Ingress is a definition of our ingress that is read and handled by Traefik.

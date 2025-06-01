@@ -13,7 +13,11 @@ class BackendApplication {
     fun corsConfigurer(): WebMvcConfigurer {
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:5173").allowedMethods("GET", "POST", "PUT", "DELETE")
+                registry
+                    .addMapping("/**")
+                    .allowedOriginPatterns("*") // Add the client URL here
+                    .allowedMethods("GET", "POST", "PUT", "DELETE")
+                    .allowedHeaders("*")
             }
         }
     }

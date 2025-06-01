@@ -30,7 +30,7 @@ Our application will be running inside OVHCloud's managed Kubernetes cluster, so
     - set name
     - Select a model
         - general purpose (B3-8)
-        - size 3
+        - size 2
     - ingen autoscaling
     - ingen anti-affinity
 - Set billing type
@@ -49,9 +49,9 @@ The application is using a PostgreSql database, let's set that up now.
 - Select a service plan
     - Business
 - Select a region
-    - London
+    - Frankfurt (DE)
 - Node type
-    - Db1-15
+    - Db1-4
 - Cluster sizing
     - None
 - Configure your options
@@ -60,7 +60,7 @@ The application is using a PostgreSql database, let's set that up now.
         - Private network attached
             - (use network created in Task 1)
         - Subnetwork
-            - 10.1.0.0/16 - UK1
+            - 10.1.0.0/16 - DE1
         - Authorised IPs
             - leave empty
         - Price: "Hour"
@@ -80,17 +80,17 @@ Managed Private Registry (Harbor)
 - Choose your plan
     - s
 - Create
-- Installing.... 6min
+- Installing... (~6min)
 
-Nice! Once the VM is up and running you can click "Generate new identification details" to get credentials to be able to log in to your new Harbor instance. Please that note of the credentials, you will need them later.
+Nice! Once the VM is up and running you can click "Generate new identification details" to get credentials to be able to log in to your new Harbor instance. Please take note of the credentials, you will need them later.
 
-You can try to login to the Harbor UI by clicking the "Access the Harbor user interface" button. From here you should be able to find the URL to which you will push images in the next task.
+You can try to log in to the Harbor UI by clicking the "Access the Harbor user interface" button. From here you should be able to find the URL to which you will push images in the next task.
 
 ## Task 4 - Prepare the applications
 
 We have created a simple TODO app consisting of a frontend React application and a backend Spring Boot application that talks to a database.
 
-Before proceeding you need to configure VITE_API_URL in the `/frontend` folder and set it to <prefix>.xxxx.com which references the subdomain (you choose the subdomain) which your app wil finally be hosed on (ask us if this is unclear).
+Before proceeding you need to configure VITE_API_URL in the `/frontend/.env` file and set it to <prefix>.computas.dev which references the subdomain (you choose the subdomain, but it must be unique) which your app will finally be hosed on.
 
 ## Task 5 - Build application container images and push to Harbor
 

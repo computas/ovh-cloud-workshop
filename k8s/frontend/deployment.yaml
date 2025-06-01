@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend-app
-          image: 4579017v.c1.de1.container-registry.ovh.net/library/frontend:latest
+          image: hkk7hxdj.c1.de1.container-registry.ovh.net/library/frontend:latest # TODO: update to your env
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
