@@ -48,6 +48,14 @@ kubectl create secret generic dbsecret --from-literal=PASSWORD=<secret> --namesp
 
 ## Task 4 - Install Traefik using helm 
 
+<details>
+  <summary>📚 More info about Traefik</summary>
+
+Traefik is an open-source reverse proxy which will be responsible for routing traffic to our Kubernetes services. It will also be responsible for terminating TLS sessions, so it will forward traffic as an HTTP request to our services. Traefik integrates well with Kubernetes and will read our `ingress.yaml` and configure itself accordingly. It also integrates with `cert-manager` which is a certificate management controller.
+
+</details>
+
+
 ```shell
 helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
