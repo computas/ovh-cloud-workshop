@@ -148,3 +148,6 @@ buildNumber.properties
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains+all,maven,kotlin,java
+
+# macOS Files
+.DS_Store
