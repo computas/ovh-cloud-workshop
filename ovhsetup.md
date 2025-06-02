@@ -8,16 +8,16 @@ Our application will be running inside OVHCloud's managed Kubernetes cluster, so
 - Set name
 - Select Location
     - deployment mode: 1-AZ region
-    - London
+    - Frankfurt
 - Select plan
     - Standard
 - Select minor version and sec policy
-    - Maximum security <- vs. Minimum unavaiable
+    - Maximum security
     - Version 1.32
 - Choose a private network for this cluster
     - Create a private network -> Add private network (do this in another tab, will return to this tab shortly)
         - Private network name
-        - London / 1-AZ region
+        - Frankfurt / 1-AZ region
         - Layer 2 network option (la stå tom)
         - Configure Subnet
             - Check off for "Enable DHCP"
