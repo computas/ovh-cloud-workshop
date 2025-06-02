@@ -1,7 +1,5 @@
 # OVHCloud Workshop
 
-bla..bla..bla..
-
 ## Prerequisites
 
 - `docker` (Docker/Colima or similar)
